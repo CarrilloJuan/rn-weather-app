@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing CurrentWeather component renders as expected 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <WeatherIcon
+    icon="10d"
+  />
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 44,
+          "fontWeight": "800",
+        }
+      }
+      testID="current-weather-temp"
+    >
+      10
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+        }
+      }
+    >
+      ºC
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#000",
+        "fontSize": 24,
+        "fontWeight": "600",
+      }
+    }
+  >
+    Buenos Aires
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#000",
+        "fontSize": 16,
+      }
+    }
+  >
+    shower rain
+  </Text>
+</View>
+`;

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Image
+  source={
+    Object {
+      "uri": "http://openweathermap.org/img/wn/03d@2x.png",
+    }
+  }
+  style={
+    Array [
+      Object {
+        "height": 90,
+        "width": 90,
+      },
+      undefined,
+    ]
+  }
+/>
+`;
