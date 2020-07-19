@@ -1,15 +1,16 @@
 import React from 'react';
-import {Text, StyleSheet, ImageBackground, View} from 'react-native';
+import {StyleSheet, ImageBackground} from 'react-native';
 import Colors from '../constants/Colors';
-import logo from '../../assets/images/logo.png';
+import backgroundImage from '../../assets/images/headerImage.jpg';
+import CurrentWeather from './CurrentWeather';
 
 const Header = () => (
   <ImageBackground
     accessibilityRole={'image'}
-    source={logo}
+    source={backgroundImage}
     style={styles.background}
-    imageStyle={styles.logo}>
-    <Text style={styles.text}>Welcome to weather App</Text>
+    imageStyle={styles.img}>
+    <CurrentWeather />
   </ImageBackground>
 );
 
@@ -20,10 +21,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lighter,
     height: 300,
   },
-  logo: {
-    opacity: 0.2,
+  img: {
+    opacity: 0.8,
     overflow: 'visible',
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   text: {
     fontSize: 28,
