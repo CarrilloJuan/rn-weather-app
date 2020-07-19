@@ -1,26 +1,28 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, View, Text, StatusBar} from 'react-native';
+import {SafeAreaView, StyleSheet, View, StatusBar} from 'react-native';
 
 import {Header} from '../../components';
 
-import styles from './styles';
+import {ForecastWeatherList} from '../../components';
 
 export default function Home() {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-            </View>
-          </View>
-        </ScrollView>
+      <SafeAreaView style={styles.container}>
+        <Header />
+        <View style={styles.body}>
+          <ForecastWeatherList />
+        </View>
       </SafeAreaView>
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {flex: 1},
+  body: {
+    marginTop: 32,
+    flex: 1,
+  },
+});

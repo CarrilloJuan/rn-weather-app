@@ -1,8 +1,8 @@
 import React from 'react';
-import {HomeScreen as RootNavigator} from './screens';
+import {HomeScreen} from './screens';
 
 const App = () => {
-  return <RootNavigator />;
+  return <HomeScreen />;
 };
 
 export default App;
