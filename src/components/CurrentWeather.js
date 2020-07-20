@@ -1,34 +1,36 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import {Text, StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
 import Colors from '../constants/Colors';
 import WeatherIcon from './WeatherIcon';
 
-export default function CurrentWeather({
-  currentTemp = '10',
-  city = 'Buenos Aires',
-  weatherDescription = 'shower rain',
-  icon = '10d',
-}) {
+export default function CurrentWeather() {
+  const {city, currentWeather} = useSelector(({location, weather}) => ({
+    city: location.location.city,
+    currentWeather: weather.data.current,
+  }));
+  const {temp, description, icon} = currentWeather || {};
+
   return (
     <View style={styles.container}>
       <WeatherIcon icon={icon} />
       <View style={styles.tempContainer}>
         <Text style={styles.temp} testID="current-weather-temp">
-          {currentTemp}
+          {temp}
         </Text>
         <Text style={styles.degrees}>ºC</Text>
       </View>
       <Text style={styles.city}>{city}</Text>
-      <Text style={styles.description}>{weatherDescription}</Text>
+      <Text style={styles.description}>{description}</Text>
     </View>
   );
 }
 
 CurrentWeather.propTypes = {
-  currentTemp: PropTypes.string.isRequired,
+  temp: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
-  weatherDescription: PropTypes.string,
+  description: PropTypes.string,
   icon: PropTypes.string.isRequired,
 };
 

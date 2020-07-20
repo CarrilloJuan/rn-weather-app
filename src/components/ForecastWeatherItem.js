@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import WeatherIcon from './WeatherIcon';
 import Colors from '../constants/Colors';
 
-export default function ForecastWeatherDay({
-  day = 'Mon',
-  icon = '10d',
-  temp = '26º/12ºC',
-}) {
+export default function ForecastWeatherDay({day, icon, temp}) {
   return (
     <View style={styles.container}>
       <View style={{flex: 2}}>
@@ -16,7 +12,7 @@ export default function ForecastWeatherDay({
       </View>
       <View style={styles.temp}>
         <WeatherIcon icon={icon} style={styles.weatherIcon} />
-        <Text style={styles.text}>{temp}</Text>
+        <Text style={styles.text}>{temp}ºC</Text>
       </View>
     </View>
   );
