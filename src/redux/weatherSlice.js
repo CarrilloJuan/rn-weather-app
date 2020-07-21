@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import api from '../services/weatherApi';
+import {getDayFromUnixTime} from '../utils';
 
 const initialState = {
   data: '',
@@ -47,11 +48,11 @@ export const {
 const getWeatherProps = ({current, daily}) => {
   const {temp, weather} = current;
   const {description, icon} = weather[0] || {};
-  const forecast = daily.slice(0, 5).reduce((acc, i) => {
+  const forecast = daily.slice(1, 6).reduce((acc, i) => {
     return [
       {
-        day: i.dt,
-        temp: `${i.temp.min}/${i.temp.max}`,
+        day: getDayFromUnixTime(i.dt),
+        temp: `${Math.trunc(i.temp.min)}/${Math.trunc(i.temp.max)}`,
         icon: i.weather[0].icon,
       },
       ...acc,
