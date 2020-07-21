@@ -13,11 +13,10 @@ export default function Home() {
     ({location, weather}) => ({
       location: location.location,
       isWeatherLoading: weather.loading,
-      forecast: weather.data.forecast,
     }),
     shallowEqual,
   );
-  const {location, isWeatherLoading, forecast} = state;
+  const {location, isWeatherLoading} = state;
   useEffect(() => {
     dispatch(fetchLocation());
   }, []);
@@ -38,7 +37,7 @@ export default function Home() {
           <>
             <Header />
             <View style={styles.body}>
-              <ForecastWeatherList weatherData={forecast} />
+              <ForecastWeatherList />
             </View>
           </>
         ) : (

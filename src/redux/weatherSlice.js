@@ -67,15 +67,41 @@ const getWeatherProps = ({current, daily}) => {
 // Define a thunk that dispatches the action creators
 export const fetchWeather = () => async (dispatch, getState) => {
   dispatch(fetchWeatherStart());
-  const {location: loc} = getState().location;
+  const {location} = getState().location;
+  const coordinates = location;
+
   const {data} = await api.get('onecall?', {
     params: {
-      lat: loc.latitude,
-      lon: loc.longitude,
+      lat: coordinates.lat,
+      lon: coordinates.lon,
     },
   });
   const weatherData = getWeatherProps(data);
   dispatch(fetchWeatherSuccess(weatherData));
+
+  try {
+  } catch (error) {
+    console.log(error);
+    dispatch(fetchWeatherFailure);
+  }
+};
+
+export const fetchWeatherByCity = (cityId) => async (dispatch) => {
+  dispatch(fetchWeatherStart());
+  const {data} = await api.get('weather?', {
+    params: {
+      id: cityId,
+    },
+  });
+  const coordinates = data.coord;
+  const {data: weatherData} = await api.get('onecall?', {
+    params: {
+      lat: coordinates.lat,
+      lon: coordinates.lon,
+    },
+  });
+  const weatherDataFormated = getWeatherProps(weatherData);
+  dispatch(fetchWeatherSuccess(weatherDataFormated));
   try {
   } catch (error) {
     console.log(error);

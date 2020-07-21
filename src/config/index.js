@@ -1,5 +1,4 @@
 import Config from 'react-native-config';
-import {configure} from 'enzyme';
 
 /*
 - WEATHERUNIT:
@@ -16,6 +15,13 @@ export default {
   apiUrl: Config.API_URL,
   weatherUnit: 'metric',
   exclude: 'minutely,hourly',
-  weatherApiKey: Config.WEATHER_API_URL,
+  weatherApiKey: Config.WEATHER_API_KEY,
   locationUrl: Config.LOCATION_API_URL,
+  defaultCities: [
+    {cityName: 'Caracas', id: '3646738'},
+    {cityName: 'Madrid', id: '3675707'},
+    {cityName: 'Paris', id: '4125402'},
+    {cityName: 'Tokyo', id: '1850147'},
+    {cityName: 'San Francisco', id: '3669857'},
+  ],
 };
