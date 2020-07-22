@@ -19,9 +19,9 @@ export default {
   locationUrl: Config.LOCATION_API_URL,
   defaultCities: [
     {cityName: 'Caracas', id: '3646738'},
-    {cityName: 'Madrid', id: '3675707'},
-    {cityName: 'Paris', id: '4125402'},
-    {cityName: 'Tokyo', id: '1850147'},
-    {cityName: 'San Francisco', id: '3669857'},
+    {cityName: 'Bogota', id: '3675707'},
+    {cityName: 'Chicago', id: '4125402'},
+    {cityName: 'Tokyo', id: '5138113'},
+    {cityName: 'Paris', id: '6455259'},
   ],
 };

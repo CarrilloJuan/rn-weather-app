@@ -11,7 +11,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const state = useSelector(
     ({location, weather}) => ({
-      location: location.location,
+      location: location.locationInfo,
       isWeatherLoading: weather.loading,
     }),
     shallowEqual,

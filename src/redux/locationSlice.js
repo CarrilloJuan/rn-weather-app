@@ -2,9 +2,10 @@ import {createSlice} from '@reduxjs/toolkit';
 import {getLocation} from '../services/locationApi';
 
 const initialState = {
-  location: '',
+  locationInfo: '',
   loading: false,
   error: false,
+  selectedCity: null,
 };
 
 const LocationSlice = createSlice({
@@ -16,12 +17,15 @@ const LocationSlice = createSlice({
       state.error = null;
     },
     fetchLocationSuccess(state, action) {
-      state.location = action.payload;
+      state.locationInfo = action.payload;
       state.loading = false;
     },
     fetchLocationFailure(state, action) {
       state.loading = false;
       state.error = action.payload;
+    },
+    setLocationCity(state, action) {
+      state.selectedCity = action.payload;
     },
   },
 });
@@ -32,12 +36,14 @@ export const {
   fetchLocationStart,
   fetchLocationSuccess,
   fetchLocationFailure,
+  setLocationCity,
 } = actions;
 
 export const fetchLocation = () => async (dispatch) => {
   dispatch(fetchLocationStart());
   const location = await getLocation();
-  dispatch(fetchLocationSuccess(location));
+  const {city, latitude, longitude} = location;
+  dispatch(fetchLocationSuccess({city, latitude, longitude}));
   try {
   } catch (error) {
     console.log(error);

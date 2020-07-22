@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import api from '../services/weatherApi';
 import {getDayFromUnixTime} from '../utils';
+import {setLocationCity} from './locationSlice';
 
 const initialState = {
   data: '',
@@ -45,12 +46,13 @@ export const {
   fetchWeatherFailure,
 } = actions;
 
-const getWeatherProps = ({current, daily}) => {
+const formatWeatherProps = ({current, daily}) => {
   const {temp, weather} = current;
   const {description, icon} = weather[0] || {};
-  const forecast = daily.slice(1, 6).reduce((acc, i) => {
+  let forecast = daily.slice(1, 6).reduce((acc, i) => {
     return [
       {
+        id: i.dt,
         day: getDayFromUnixTime(i.dt),
         temp: `${Math.trunc(i.temp.min)}/${Math.trunc(i.temp.max)}`,
         icon: i.weather[0].icon,
@@ -58,6 +60,7 @@ const getWeatherProps = ({current, daily}) => {
       ...acc,
     ];
   }, []);
+  forecast = forecast.sort((a, b) => a.id - b.id);
   return {
     current: {temp, description, icon},
     forecast,
@@ -66,46 +69,45 @@ const getWeatherProps = ({current, daily}) => {
 
 // Define a thunk that dispatches the action creators
 export const fetchWeather = () => async (dispatch, getState) => {
-  dispatch(fetchWeatherStart());
-  const {location} = getState().location;
-  const coordinates = location;
-
-  const {data} = await api.get('onecall?', {
-    params: {
-      lat: coordinates.lat,
-      lon: coordinates.lon,
-    },
-  });
-  const weatherData = getWeatherProps(data);
-  dispatch(fetchWeatherSuccess(weatherData));
-
   try {
+    dispatch(fetchWeatherStart());
+    const {locationInfo} = getState().location;
+    const {data} = await api.get('onecall?', {
+      params: {
+        lat: locationInfo.latitude,
+        lon: locationInfo.longitude,
+      },
+    });
+    dispatch(setLocationCity(null));
+    const weatherData = formatWeatherProps(data);
+    dispatch(fetchWeatherSuccess(weatherData));
   } catch (error) {
     console.log(error);
-    dispatch(fetchWeatherFailure);
+    dispatch(fetchWeatherFailure());
   }
 };
 
-export const fetchWeatherByCity = (cityId) => async (dispatch) => {
-  dispatch(fetchWeatherStart());
-  const {data} = await api.get('weather?', {
-    params: {
-      id: cityId,
-    },
-  });
-  const coordinates = data.coord;
-  const {data: weatherData} = await api.get('onecall?', {
-    params: {
-      lat: coordinates.lat,
-      lon: coordinates.lon,
-    },
-  });
-  const weatherDataFormated = getWeatherProps(weatherData);
-  dispatch(fetchWeatherSuccess(weatherDataFormated));
+export const fetchWeatherByCity = ({id, cityName}) => async (dispatch) => {
   try {
+    dispatch(fetchWeatherStart());
+    const {data} = await api.get('weather?', {
+      params: {
+        id,
+      },
+    });
+    const coordinates = data.coord;
+    const {data: weatherData} = await api.get('onecall?', {
+      params: {
+        lat: coordinates.lat,
+        lon: coordinates.lon,
+      },
+    });
+    dispatch(setLocationCity(cityName));
+    const weatherDataFormated = formatWeatherProps(weatherData);
+    dispatch(fetchWeatherSuccess(weatherDataFormated));
   } catch (error) {
     console.log(error);
-    dispatch(fetchWeatherFailure);
+    dispatch(fetchWeatherFailure());
   }
 };
 

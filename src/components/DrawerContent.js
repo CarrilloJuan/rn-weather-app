@@ -4,7 +4,7 @@ import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {FlatList, View, StyleSheet} from 'react-native';
 
 import CityItem from './CityItem';
-import {fetchWeatherByCity} from '../redux/weatherSlice';
+import {fetchWeatherByCity, fetchWeather} from '../redux/weatherSlice';
 import config from '../config';
 
 const cities = config.defaultCities;
@@ -20,6 +20,7 @@ export default function DrawerContent(props) {
 
   return (
     <DrawerContentScrollView {...props}>
+      <DrawerItem label="Home" onPress={() => dispatch(fetchWeather())} />
       <DrawerItem label="Other locations" />
       <View style={styles.container}>
         <FlatList
@@ -27,7 +28,9 @@ export default function DrawerContent(props) {
           renderItem={({item}) => (
             <CityItem
               {...item}
-              fetcheWeather={(cityId) => dispatch(fetchWeatherByCity(cityId))}
+              fetcheWeather={(cityInfo) =>
+                dispatch(fetchWeatherByCity(cityInfo))
+              }
             />
           )}
           keyExtractor={(item) => item.id}

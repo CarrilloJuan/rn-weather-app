@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
 export default function CityItem({cityName, id, fetcheWeather}) {
   return (
-    <TouchableOpacity onPress={() => fetcheWeather(id)}>
+    <TouchableOpacity onPress={() => fetcheWeather({id, cityName})}>
       <Text style={styles.text}>{cityName}</Text>
     </TouchableOpacity>
   );

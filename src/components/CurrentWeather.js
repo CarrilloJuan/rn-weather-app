@@ -6,12 +6,12 @@ import Colors from '../constants/Colors';
 import WeatherIcon from './WeatherIcon';
 
 export default function CurrentWeather() {
-  const {city, currentWeather} = useSelector(({location, weather}) => ({
-    city: location.location.city,
+  const {location, currentWeather} = useSelector(({location, weather}) => ({
+    location,
     currentWeather: weather.data.current,
   }));
   const {temp, description, icon} = currentWeather || {};
-
+  const city = location.selectedCity || location.locationInfo.city;
   return (
     <View style={styles.container}>
       <WeatherIcon icon={icon} />
