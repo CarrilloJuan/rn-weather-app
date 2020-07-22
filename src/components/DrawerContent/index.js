@@ -4,8 +4,8 @@ import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {FlatList, View, StyleSheet} from 'react-native';
 
 import CityItem from './CityItem';
-import {fetchWeatherByCity, fetchWeather} from '../redux/weatherSlice';
-import config from '../config';
+import {fetchWeatherByCity, fetchWeather} from '../../store/weatherSlice';
+import config from '../../config';
 
 const cities = config.defaultCities;
 

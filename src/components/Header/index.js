@@ -1,18 +1,21 @@
 import React from 'react';
 import {StyleSheet, ImageBackground} from 'react-native';
-import Colors from '../constants/Colors';
-import backgroundImage from '../../assets/images/headerImage.jpg';
-import CurrentWeather from './CurrentWeather';
 
-const Header = () => (
-  <ImageBackground
-    accessibilityRole={'image'}
-    source={backgroundImage}
-    style={styles.background}
-    imageStyle={styles.img}>
-    <CurrentWeather />
-  </ImageBackground>
-);
+import Colors from '../../constants/Colors';
+import backgroundImage from '../../../assets/images/headerImage.jpg';
+import CurrentWeather from '../CurrentWeather';
+
+export default function Header() {
+  return (
+    <ImageBackground
+      accessibilityRole={'image'}
+      source={backgroundImage}
+      style={styles.background}
+      imageStyle={styles.img}>
+      <CurrentWeather />
+    </ImageBackground>
+  );
+}
 
 const styles = StyleSheet.create({
   background: {
@@ -33,5 +36,3 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
 });
-
-export default Header;

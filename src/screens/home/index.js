@@ -4,22 +4,25 @@ import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 
 import {Header, ForecastWeatherList, Loading} from '../../components';
 
-import {fetchWeather} from '../../redux/weatherSlice';
-import {fetchLocation} from '../../redux/locationSlice';
+import {fetchWeather} from '../../store/weatherSlice';
+import {fetchLocation} from '../../store/locationSlice';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const state = useSelector(
-    ({location, weather}) => ({
-      location: location.locationInfo,
-      isWeatherLoading: weather.loading,
-    }),
-    shallowEqual,
-  );
-  const {location, isWeatherLoading} = state;
+
   useEffect(() => {
     dispatch(fetchLocation());
   }, []);
+
+  const state = useSelector(
+    ({location, weather}) => ({
+      location: location.locationInfo,
+      weather,
+    }),
+    shallowEqual,
+  );
+  const {location, weather} = state;
+
   const isFirstRun = useRef(true);
   useEffect(() => {
     if (isFirstRun.current) {
@@ -29,11 +32,13 @@ export default function Home() {
     dispatch(fetchWeather());
   }, [location]);
 
+  const isCurrentWeatherReady = weather.success && !weather.loading;
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
-        {location && !isWeatherLoading ? (
+        {isCurrentWeatherReady ? (
           <>
             <Header />
             <View style={styles.body}>

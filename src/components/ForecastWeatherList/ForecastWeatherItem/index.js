@@ -1,8 +1,9 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {Text, View} from 'react-native';
 import PropTypes from 'prop-types';
-import WeatherIcon from './WeatherIcon';
-import Colors from '../constants/Colors';
+
+import WeatherIcon from '../../WeatherIcon';
+import styles from './styles';
 
 export default function ForecastWeatherDay({day, icon, temp}) {
   return (
@@ -23,25 +24,3 @@ ForecastWeatherDay.propTypes = {
   icon: PropTypes.string.isRequired,
   temp: PropTypes.string.isRequired,
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    paddingHorizontal: 24,
-    alignItems: 'center',
-  },
-  temp: {
-    flex: 2,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  text: {
-    fontSize: 18,
-    color: Colors.black,
-  },
-  weatherIcon: {
-    height: 50,
-    width: 50,
-  },
-});
