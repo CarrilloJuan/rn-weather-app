@@ -1,5 +1,4 @@
 import Config from 'react-native-config';
-
 /*
 - WEATHERUNIT:
    Temperature is available in Fahrenheit, Celsius and Kelvin units.
@@ -17,11 +16,5 @@ export default {
   exclude: 'minutely,hourly',
   weatherApiKey: Config.WEATHER_API_KEY,
   locationUrl: Config.LOCATION_API_URL,
-  defaultCities: [
-    {cityName: 'Caracas', id: '3646738'},
-    {cityName: 'Bogota', id: '3675707'},
-    {cityName: 'Chicago', id: '4125402'},
-    {cityName: 'Tokyo', id: '5138113'},
-    {cityName: 'Paris', id: '6455259'},
-  ],
+  defaultCities: Config.DEFAULT_CITIES && JSON.parse(Config.DEFAULT_CITIES),
 };
