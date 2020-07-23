@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {getLocation} from '../services/locationApi';
+import translations from '../services/translations';
 
 const initialState = {
   locationInfo: '',
@@ -40,14 +41,19 @@ export const {
 } = actions;
 
 export const fetchLocation = () => async (dispatch) => {
-  dispatch(fetchLocationStart());
-  const location = await getLocation();
-  const {city, latitude, longitude} = location;
-  dispatch(fetchLocationSuccess({city, latitude, longitude}));
   try {
+    dispatch(fetchLocationStart());
+    const location = await getLocation();
+    const {city, latitude, longitude} = location;
+    dispatch(fetchLocationSuccess({city, latitude, longitude}));
   } catch (error) {
     console.log(error);
-    dispatch(fetchLocationFailure);
+    dispatch(
+      fetchLocationFailure({
+        key: 'getLocationError',
+        msg: translations.requestError,
+      }),
+    );
   }
 };
 

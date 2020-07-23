@@ -46,6 +46,9 @@ export const {
   fetchWeatherFailure,
 } = actions;
 
+/* Returns the weather data needed and formated, like the current temperature,
+description, representational icon, and the forecast weather for the next five days.
+*/
 const formatWeatherProps = ({current, daily}) => {
   const {temp, weather} = current;
   const {description, icon} = weather[0] || {};
@@ -83,7 +86,7 @@ export const fetchWeather = () => async (dispatch, getState) => {
     dispatch(fetchWeatherSuccess(weatherData));
   } catch (error) {
     console.log(error);
-    dispatch(fetchWeatherFailure());
+    dispatch(fetchWeatherFailure({msg: error.message}));
   }
 };
 
@@ -111,5 +114,4 @@ export const fetchWeatherByCity = ({id, cityName}) => async (dispatch) => {
   }
 };
 
-// Export the reducer, either as a default or named export
 export default reducer;

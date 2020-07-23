@@ -5,4 +5,6 @@ export default {
   light: '#DAE1E7',
   dark: '#444',
   black: '#000',
+  backdrop: 'rgba(0, 0, 0, 0.9)',
+  error: '#C34A36',
 };

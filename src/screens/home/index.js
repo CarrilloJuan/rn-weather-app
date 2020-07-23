@@ -2,10 +2,11 @@ import React, {useEffect, useRef} from 'react';
 import {SafeAreaView, StyleSheet, View, StatusBar} from 'react-native';
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 
-import {Header, ForecastWeatherList, Loading} from '../../components';
+import {Header, ForecastWeatherList, Loading, Modal} from '../../components';
 
 import {fetchWeather} from '../../store/weatherSlice';
 import {fetchLocation} from '../../store/locationSlice';
+import translation from '../../services/translations';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -17,11 +18,12 @@ export default function Home() {
   const state = useSelector(
     ({location, weather}) => ({
       location: location.locationInfo,
+      error: location.error || weather.error,
       weather,
     }),
     shallowEqual,
   );
-  const {location, weather} = state;
+  const {location, weather, error} = state;
 
   const isFirstRun = useRef(true);
   useEffect(() => {
@@ -47,6 +49,18 @@ export default function Home() {
           </>
         ) : (
           <Loading />
+        )}
+        {error && (
+          <Modal
+            message={error.msg}
+            actionText={translation.modalCtaText}
+            action={() =>
+              error.key === 'getLocationError'
+                ? dispatch(fetchLocation())
+                : dispatch(fetchWeather())
+            }
+            show
+          />
         )}
       </SafeAreaView>
     </>
