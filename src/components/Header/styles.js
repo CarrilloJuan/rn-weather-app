@@ -12,7 +12,7 @@ export default StyleSheet.create({
   },
   img: {
     opacity: 0.8,
-    overflow: 'visible',
+    overflow: 'hidden',
     resizeMode: 'cover',
   },
   text: {
