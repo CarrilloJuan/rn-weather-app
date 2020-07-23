@@ -20,7 +20,7 @@ const setup = (propOverrides) => {
   };
 };
 
-describe('Testing CurrentWeather component', () => {
+describe('CurrentWeather component', () => {
   it('renders as expected', () => {
     const {wrapper} = setup();
     expect(wrapper).toMatchSnapshot();

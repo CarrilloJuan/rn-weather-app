@@ -11,12 +11,14 @@ export default function ForecastWeather() {
     }),
     shallowEqual,
   );
-  const renderItem = ({item}) => <ForecastWeatherItem {...item} />;
+  const renderItem = ({item}) => (
+    <ForecastWeatherItem {...item} testID="forecast-item" />
+  );
   return (
     <FlatList
       data={forecast}
       renderItem={renderItem}
-      keyExtractor={(item) => item.day}
+      keyExtractor={(item) => `${item.day}`}
     />
   );
 }

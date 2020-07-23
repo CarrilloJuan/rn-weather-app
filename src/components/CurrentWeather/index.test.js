@@ -1,35 +1,62 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {CurrentWeather} from '.';
+import {useSelector} from 'react-redux';
+import CurrentWeather from '.';
 
-const setup = (propOverrides) => {
-  const props = Object.assign(
-    {
-      currentTemp: '10',
-      city: 'Buenos Aires',
-      weatherDescription: 'shower rain',
-      icon: '10d',
-    },
-    propOverrides,
-  );
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(),
+}));
 
-  const wrapper = shallow(<CurrentWeather {...props} />);
+describe('Component CurrentWeather', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-  return {
-    props,
-    wrapper,
-  };
-};
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
 
-describe('Testing CurrentWeather component', () => {
   it('renders as expected', () => {
-    const {wrapper} = setup();
+    const mockState = {
+      location: {
+        locationInfo: {city: 'Buenos Aires'},
+      },
+      weather: {
+        data: {
+          current: {
+            temp: '10',
+            description: 'shower rain',
+            icon: '10d',
+          },
+        },
+      },
+    };
+    useSelector.mockImplementation((selector) => selector(mockState));
+    const wrapper = shallow(<CurrentWeather />);
     expect(wrapper).toMatchSnapshot();
   });
-  it('should show the correct temperature', () => {
-    const {wrapper, props} = setup();
-    expect(
-      wrapper.find({testID: 'current-weather-temp'}).props(),
-    ).toHaveProperty('children', props.currentTemp);
+
+  it('should show the selected city', () => {
+    const mockState = {
+      location: {
+        selectedCity: 'Tokyo',
+        locationInfo: {city: 'Buenos Aires'},
+      },
+      weather: {
+        data: {
+          current: {
+            temp: '10',
+            description: 'shower rain',
+            icon: '10d',
+          },
+        },
+      },
+    };
+    useSelector.mockImplementation((selector) => selector(mockState));
+    const wrapper = shallow(<CurrentWeather />);
+    expect(wrapper.find({testID: 'weather-city'}).props()).toHaveProperty(
+      'children',
+      mockState.location.selectedCity,
+    );
   });
 });

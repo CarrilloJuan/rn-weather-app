@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import WeatherIcon from '../../WeatherIcon';
 import styles from './styles';
 
-export default function ForecastWeatherDay({day, icon, temp}) {
+export default function ForecastWeatherItem({day, icon, temp}) {
   return (
     <View style={styles.container}>
       <View style={{flex: 2}}>
@@ -19,7 +19,7 @@ export default function ForecastWeatherDay({day, icon, temp}) {
   );
 }
 
-ForecastWeatherDay.propTypes = {
+ForecastWeatherItem.propTypes = {
   day: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   temp: PropTypes.string.isRequired,

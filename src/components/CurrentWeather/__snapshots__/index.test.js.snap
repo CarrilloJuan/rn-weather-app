@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing CurrentWeather component renders as expected 1`] = `
+exports[`Component CurrentWeather renders as expected 1`] = `
 <View
   style={
     Object {
@@ -26,7 +26,6 @@ exports[`Testing CurrentWeather component renders as expected 1`] = `
           "fontWeight": "800",
         }
       }
-      testID="current-weather-temp"
     >
       10
     </Text>
@@ -48,6 +47,7 @@ exports[`Testing CurrentWeather component renders as expected 1`] = `
         "fontWeight": "600",
       }
     }
+    testID="weather-city"
   >
     Buenos Aires
   </Text>

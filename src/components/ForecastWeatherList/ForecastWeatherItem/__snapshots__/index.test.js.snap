@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrentWeather component renders as expected 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "paddingHorizontal": 24,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#000",
+          "fontSize": 18,
+        }
+      }
+    >
+      Mon
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 2,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+      }
+    }
+  >
+    <WeatherIcon
+      icon="10d"
+      style={
+        Object {
+          "height": 50,
+          "width": 50,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#000",
+          "fontSize": 18,
+        }
+      }
+    >
+      26º/12ºC
+      ºC
+    </Text>
+  </View>
+</View>
+`;

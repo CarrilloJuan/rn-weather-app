@@ -1,6 +1,5 @@
-import 'react-native';
 import React from 'react';
-import {WeatherIcon} from '.';
+import WeatherIcon from '.';
 import {shallow} from 'enzyme';
 
 it('renders correctly', () => {

@@ -11,26 +11,30 @@ export default function CurrentWeather() {
     location,
     currentWeather: weather.data.current,
   }));
+
   const {temp, description, icon} = currentWeather || {};
   const city = location.selectedCity || location.locationInfo.city;
+
   return (
-    <View style={styles.container}>
-      <WeatherIcon icon={icon} />
-      <View style={styles.tempContainer}>
-        <Text style={styles.temp} testID="current-weather-temp">
-          {temp}
+    currentWeather && (
+      <View style={styles.container}>
+        <WeatherIcon icon={icon} />
+        <View style={styles.tempContainer}>
+          <Text style={styles.temp}>{temp}</Text>
+          <Text style={styles.degrees}>ºC</Text>
+        </View>
+        <Text style={styles.city} testID="weather-city">
+          {city}
         </Text>
-        <Text style={styles.degrees}>ºC</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
-      <Text style={styles.city}>{city}</Text>
-      <Text style={styles.description}>{description}</Text>
-    </View>
+    )
   );
 }
 
 CurrentWeather.propTypes = {
-  temp: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
+  temp: PropTypes.string,
+  city: PropTypes.string,
   description: PropTypes.string,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
 };
