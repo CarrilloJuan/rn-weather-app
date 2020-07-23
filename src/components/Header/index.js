@@ -15,7 +15,8 @@ export default function Header() {
       accessibilityRole={'image'}
       source={backgroundImage}
       style={styles.background}
-      imageStyle={styles.img}>
+      imageStyle={styles.img}
+    >
       <View styles={styles.container}>
         <View style={styles.button}>
           <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
