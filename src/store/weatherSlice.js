@@ -22,7 +22,7 @@ const weatherSlice = createSlice({
   reducers: {
     fetchWeatherStart(state) {
       state.loading = true;
-      state.error = null;
+      state.error = false;
     },
     fetchWeatherSuccess(state, action) {
       state.data = action.payload;
@@ -83,6 +83,7 @@ export const fetchWeather = () => async (dispatch, getState) => {
     });
     dispatch(setLocationCity(null));
     const weatherData = formatWeatherProps(data);
+    console.log({weatherData});
     dispatch(fetchWeatherSuccess(weatherData));
   } catch (error) {
     console.log(error);

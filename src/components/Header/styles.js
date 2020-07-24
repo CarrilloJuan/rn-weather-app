@@ -21,7 +21,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: Colors.black,
   },
-  button: {
+  menu: {
     alignItems: 'flex-end',
     marginTop: 8,
     marginRight: 16,

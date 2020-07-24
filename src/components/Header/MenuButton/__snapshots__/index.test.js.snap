@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuButton Component renders as expected 1`] = `
+<ForwardRef
+  onPress={[Function]}
+  testID="menu-button"
+>
+  <Icon
+    allowFontScaling={false}
+    color="#444"
+    name="menu"
+    size={30}
+  />
+</ForwardRef>
+`;

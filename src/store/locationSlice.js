@@ -6,7 +6,7 @@ const initialState = {
   locationInfo: '',
   loading: false,
   error: false,
-  selectedCity: null,
+  selectedCity: '',
 };
 
 const LocationSlice = createSlice({
@@ -15,7 +15,7 @@ const LocationSlice = createSlice({
   reducers: {
     fetchLocationStart(state) {
       state.loading = true;
-      state.error = null;
+      state.error = false;
     },
     fetchLocationSuccess(state, action) {
       state.locationInfo = action.payload;
@@ -47,7 +47,6 @@ export const fetchLocation = () => async (dispatch) => {
     const {city, latitude, longitude} = location;
     dispatch(fetchLocationSuccess({city, latitude, longitude}));
   } catch (error) {
-    console.log(error);
     dispatch(
       fetchLocationFailure({
         key: 'getLocationError',

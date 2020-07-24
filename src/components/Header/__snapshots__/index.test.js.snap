@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component renders as expected 1`] = `
+<ImageBackground
+  accessibilityRole="image"
+  imageStyle={
+    Object {
+      "opacity": 0.8,
+      "overflow": "hidden",
+      "resizeMode": "cover",
+    }
+  }
+  source={
+    Object {
+      "testUri": "../../../assets/images/headerImage.jpg",
+    }
+  }
+  style={
+    Object {
+      "backgroundColor": "#F3F3F3",
+      "height": 300,
+    }
+  }
+>
+  <View
+    styles={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "marginRight": 16,
+          "marginTop": 8,
+        }
+      }
+    >
+      <MenuButton />
+    </View>
+    <CurrentWeather />
+  </View>
+</ImageBackground>
+`;
